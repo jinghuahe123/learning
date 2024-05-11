@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ReverseString {
@@ -7,14 +8,23 @@ public class ReverseString {
         System.out.print("Input String: ");
         String x = scanner.nextLine();
 
-        int len_x = x.length();
+        System.out.println(reverse(x));
 
-        //System.out.println(x.charAt(1));
+    }
 
-        for (int i = len_x; i > 0; i--) {
-            //x.toCharArray(System.out::println);
-            System.out.print(x.charAt(i-1));
-            //System.out.println(i);
+    static String reverse(String string) {
+        int len = string.length();
+        String[] out = new String[len];
+
+        for (int i = len; i > 0; i--) {
+            out[len-i] = String.valueOf(string.charAt(i-1));
         }
+
+        String output = "";
+        for (String i : out) {
+            output = output + i;
+        }
+
+        return output;
     }
 }

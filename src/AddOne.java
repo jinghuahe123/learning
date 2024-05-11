@@ -31,11 +31,6 @@ import java.util.Scanner;
 
 public class AddOne {
     public static void main(String[] args) {
-        //convertInt();
-        efficient();
-    }
-
-    public static void convertInt() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter array Size: ");
@@ -48,6 +43,12 @@ public class AddOne {
             }
         }
 
+        System.out.println(Arrays.toString(example(input)));
+        //System.out.println(Arrays.toString(efficient(input))); //DEPRECATED MAY NOT WORK
+        //System.out.println(Arrays.toString(convertInt(input)));
+    }
+
+    static int[] convertInt(int[] input) {
         //System.out.println(Arrays.toString(input));
         String process = "";
         for (int j : input) {
@@ -65,28 +66,17 @@ public class AddOne {
             out[i] = convert.charAt(i)-'0';
         }
 
-        System.out.println(Arrays.toString(out));
+        return out;
     }
 
-    public static void efficient() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter array Size: ");
-        int size = scanner.nextInt();
-        int[] input = new int[size];
-        System.out.println("Enter array values: ");
-        for (int i=0; i<size; i++) {
-            if (scanner.hasNextInt()) {
-                input[i] = scanner.nextInt();
-            }
-        }
-
+    static int[] efficient(int[] input) {
         int length = input.length-1;
         //System.out.println(input[length]);
         boolean overflow = false;
         boolean flag = false;
         boolean doIt = true;
-        int[] output = new int[size+1];
+        //int[] output = new int[size+1];
+        int[] output = new int[input.length+1];
         //System.out.println(length);
         //System.out.println(size);
         for (int i=length; i>=0; i--) {
@@ -105,7 +95,7 @@ public class AddOne {
                     output[j] = input[j];
                 }
                 output[i] = 1;
-                output[size] = 0;
+                output[input.length+1] = 0;
                 flag = true;
                 doIt = false;
             } else if (input[i] == 10) {
@@ -116,10 +106,31 @@ public class AddOne {
         }
         if (doIt) input[length] += 1;
 
+        /*
         if (!flag) {
-            System.out.println(Arrays.toString(input));
+            return input;
         } else if (flag) {
-            System.out.println(Arrays.toString(output));
+            return output;
         }
+        */
+        return input;
+    }
+
+    static int[] example(int[] input) {
+        boolean flag = false;
+        int carry = 0;
+
+        for (int i=input.length; i>0; i--) {
+            if (i==input.length) {
+                input[i-1] += 1;
+            } else {
+                if (input[i]>9) {
+                    input[i] -= 10;
+                    input[i-1]++;
+                }
+            }
+        }
+
+        return input;
     }
 }
