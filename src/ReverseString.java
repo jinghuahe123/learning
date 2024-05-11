@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class ReverseString {
@@ -20,11 +19,11 @@ public class ReverseString {
             out[len-i] = String.valueOf(string.charAt(i-1));
         }
 
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (String i : out) {
-            output = output + i;
+            output.append(i);
         }
 
-        return output;
+        return output.toString();
     }
 }
